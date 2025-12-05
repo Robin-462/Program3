@@ -54,6 +54,12 @@ public class MiniMapComponent : MonoBehaviour
             
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.playOnAwake = false;
+            
+            if (GameObject.Find("MessageDisplay") == null)
+            {
+                GameObject displayObj = new GameObject("MessageDisplay");
+                displayObj.AddComponent<MessageDisplay>();
+            }
         }
     }
 
@@ -76,8 +82,9 @@ public class MiniMapComponent : MonoBehaviour
         
         PlaySound();
         
-        string message = isFinishLine ? "Race Completed!" : $"Waypoint {waypointNumber} reached!";
-        Debug.Log(message);
+        string message = isFinishLine ? "Race Completed!" : $"Arrive {gameObject.name}";
+        
+        MessageDisplay.SetMessage(message, 2.0f);
         
         enabled = false;
     }
@@ -96,5 +103,52 @@ public class MiniMapComponent : MonoBehaviour
         {
             audioSource.Play();
         }
+    }
+}
+
+public class MessageDisplay : MonoBehaviour
+{
+    private static string message = "";
+    private static float timer = 0f;
+    
+    void Update()
+    {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                message = "";
+            }
+        }
+    }
+    
+    void OnGUI()
+    {
+        if (!string.IsNullOrEmpty(message))
+        {
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 36;
+            style.fontStyle = FontStyle.Bold;
+            style.normal.textColor = Color.yellow;
+            style.alignment = TextAnchor.MiddleCenter;
+            
+            GUI.Label(new Rect(0, Screen.height/2 - 50, Screen.width, 100), message, style);
+            
+            GUI.color = Color.black;
+            GUI.Label(new Rect(2, Screen.height/2 - 48, Screen.width, 100), message, style);
+            GUI.Label(new Rect(-2, Screen.height/2 - 48, Screen.width, 100), message, style);
+            GUI.Label(new Rect(0, Screen.height/2 - 52, Screen.width, 100), message, style);
+            GUI.Label(new Rect(0, Screen.height/2 - 48, Screen.width, 100), message, style);
+            
+            GUI.color = Color.yellow;
+            GUI.Label(new Rect(0, Screen.height/2 - 50, Screen.width, 100), message, style);
+        }
+    }
+    
+    public static void SetMessage(string newMessage, float displayTime)
+    {
+        message = newMessage;
+        timer = displayTime;
     }
 }
