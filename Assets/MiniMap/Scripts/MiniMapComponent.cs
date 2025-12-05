@@ -8,50 +8,93 @@ using UnityEngine;
 
 public class MiniMapEntity
 {
-	public bool showDetails = false;
-	public Sprite icon;
-	public bool rotateWithObject = true;
-	public Vector3 upAxis;
-	public float rotation;
-	public Vector2 size;
-	public bool clampInBorder;
-	public float clampDist;
-	public List<GameObject> mapObjects;
+    public Sprite icon;
+    public bool rotateWithObject = true;
+    public Vector2 size;
 }
 
 public class MiniMapComponent : MonoBehaviour 
 {
-	[Tooltip("Set the icon of this gameobject")]
-	public Sprite icon;
-	[Tooltip("Set the size of the icon")]
-	public Vector2 size = new Vector2(20,20);
-	[Tooltip("Set true if the icon rotates with the gameobject")]
-	public bool rotateWithObject = false;
-	[Tooltip("Adjust the rotation axis according to your gameobject. Values of each axis can be either -1,0 or 1")]
-	public Vector3 upAxis = new Vector3(0,1,0);
-	[Tooltip("Adjust initial rotation of the icon")]
-	public float initialIconRotation;
-	[Tooltip("If true the icons will be clamped in the border")]
-	public bool clampIconInBorder = true;
-	[Tooltip("Set the distance from target after which the icon will not be shown. Setting it 0 will always show the icon.")]
-	public float clampDistance = 100;
+    public Sprite icon;
+    public Vector2 size = new Vector2(20,20);
+    public bool rotateWithObject = false;
+    public bool isWaypoint = false;
+    public int waypointNumber = 1;
+    public bool isFinishLine = false;
+    public float triggerDistance = 10.0f;
+    public AudioClip waypointSound;
+    public AudioClip finishSound;
 
-	MiniMapController miniMapController;
-	MiniMapEntity mme;
-	MapObject mmo;
+    MiniMapController miniMapController;
+    MiniMapEntity mme;
+    MapObject mmo;
 
-	void Start()
-	{
-		miniMapController = GameObject.Find ("MiniMap").GetComponent<MiniMapController> ();
-		mme = new MiniMapEntity ();
-		mme.icon = icon;
-		mme.rotation = initialIconRotation;
-		mme.size = size;
-		mme.upAxis = upAxis;
-		mme.rotateWithObject = rotateWithObject;
-		mme.clampInBorder = clampIconInBorder;
-		mme.clampDist = clampDistance;
+    private bool hasBeenTriggered = false;
+    private GameObject playerCar;
+    private AudioSource audioSource;
 
-		mmo = miniMapController.RegisterMapObject(this.gameObject, mme);
-	}
+    void Start()
+    {
+        miniMapController = GameObject.Find("MiniMap").GetComponent<MiniMapController>();
+        mme = new MiniMapEntity();
+        mme.icon = icon;
+        mme.size = size;
+        mme.rotateWithObject = rotateWithObject;
+
+        mmo = miniMapController.RegisterMapObject(this.gameObject, mme);
+
+        if (isWaypoint || isFinishLine)
+        {
+            playerCar = GameObject.Find("Player Car");
+            
+            if (playerCar == null)
+            {
+                playerCar = GameObject.FindGameObjectWithTag("Player");
+            }
+            
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+        }
+    }
+
+    void Update()
+    {
+        if ((!isWaypoint && !isFinishLine) || hasBeenTriggered || playerCar == null)
+            return;
+        
+        float distance = Vector3.Distance(transform.position, playerCar.transform.position);
+        
+        if (distance <= triggerDistance)
+        {
+            TriggerWaypoint();
+        }
+    }
+
+    void TriggerWaypoint()
+    {
+        hasBeenTriggered = true;
+        
+        PlaySound();
+        
+        string message = isFinishLine ? "Race Completed!" : $"Waypoint {waypointNumber} reached!";
+        Debug.Log(message);
+        
+        enabled = false;
+    }
+    
+    void PlaySound()
+    {
+        if (audioSource == null) return;
+        
+        AudioClip soundToPlay = isFinishLine ? finishSound : waypointSound;
+        
+        if (soundToPlay != null)
+        {
+            audioSource.PlayOneShot(soundToPlay);
+        }
+        else
+        {
+            audioSource.Play();
+        }
+    }
 }

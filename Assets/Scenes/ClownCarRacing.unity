@@ -1330,6 +1330,43 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7211637597200131762, guid: 64190aed95de8bc48aeed31299159841, type: 3}
+--- !u!84 &71134619
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 257
+  m_Height: 257
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &72487716 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 64190aed95de8bc48aeed31299159841, type: 3}
@@ -5296,43 +5333,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1507716565033929145, guid: 7123287daf07caa41933a3feb56047c6, type: 3}
---- !u!84 &287878605
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 257
-  m_Height: 257
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1001 &293765256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11571,10 +11571,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: efa5336e4e9ba504c83b45b80ad7df8c, type: 3}
   size: {x: 20, y: 20}
   rotateWithObject: 0
-  upAxis: {x: 0, y: 1, z: 0}
-  initialIconRotation: 0
-  clampIconInBorder: 1
-  clampDistance: 100
+  isWaypoint: 1
+  waypointNumber: 1
+  isFinishLine: 0
+  triggerDistance: 10
+  waypointSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  finishSound: {fileID: 0}
 --- !u!212 &627647259
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13828,10 +13830,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: efa5336e4e9ba504c83b45b80ad7df8c, type: 3}
   size: {x: 20, y: 20}
   rotateWithObject: 0
-  upAxis: {x: 0, y: 1, z: 0}
-  initialIconRotation: 0
-  clampIconInBorder: 1
-  clampDistance: 100
+  isWaypoint: 1
+  waypointNumber: 1
+  isFinishLine: 0
+  triggerDistance: 10
+  waypointSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  finishSound: {fileID: 0}
 --- !u!212 &740462899
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13892,7 +13896,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740462897}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 252.98, y: 6.81, z: 296.29}
+  m_LocalPosition: {x: 257.47, y: 6.81, z: 296.29}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18986,10 +18990,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 5b47ca1209db34047b14f65d2db913e4, type: 3}
   size: {x: 30, y: 30}
   rotateWithObject: 0
-  upAxis: {x: 0, y: 1, z: 0}
-  initialIconRotation: 0
-  clampIconInBorder: 1
-  clampDistance: 100
+  isWaypoint: 0
+  waypointNumber: 1
+  isFinishLine: 0
+  triggerDistance: 3
+  waypointSound: {fileID: 0}
+  finishSound: {fileID: 0}
 --- !u!54 &1018987285
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23072,7 +23078,7 @@ PrefabInstance:
     - target: {fileID: 2057960, guid: 98e2b8a7d6de642f8ae08a3cbb957b7a, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 287878605}
+      objectReference: {fileID: 71134619}
     - target: {fileID: 2057960, guid: 98e2b8a7d6de642f8ae08a3cbb957b7a, type: 3}
       propertyPath: orthographic size
       value: 53.07
@@ -24306,10 +24312,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: efa5336e4e9ba504c83b45b80ad7df8c, type: 3}
   size: {x: 20, y: 20}
   rotateWithObject: 0
-  upAxis: {x: 0, y: 1, z: 0}
-  initialIconRotation: 0
-  clampIconInBorder: 1
-  clampDistance: 100
+  isWaypoint: 1
+  waypointNumber: 1
+  isFinishLine: 0
+  triggerDistance: 10
+  waypointSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  finishSound: {fileID: 0}
 --- !u!212 &1352540127
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28092,10 +28100,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 689e841f0cffc5c4cbc07ae1a2b705c5, type: 3}
   size: {x: 20, y: 20}
   rotateWithObject: 0
-  upAxis: {x: 0, y: 1, z: 0}
-  initialIconRotation: 0
-  clampIconInBorder: 1
-  clampDistance: 100
+  isWaypoint: 0
+  waypointNumber: 1
+  isFinishLine: 1
+  triggerDistance: 10
+  waypointSound: {fileID: 0}
+  finishSound: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
 --- !u!212 &1556960065
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28156,7 +28166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556960063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 400.62, y: 13.55, z: 310.2}
+  m_LocalPosition: {x: 400.5, y: 14.1, z: 307.5}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29493,10 +29503,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: efa5336e4e9ba504c83b45b80ad7df8c, type: 3}
   size: {x: 20, y: 20}
   rotateWithObject: 0
-  upAxis: {x: 0, y: 1, z: 0}
-  initialIconRotation: 0
-  clampIconInBorder: 1
-  clampDistance: 100
+  isWaypoint: 1
+  waypointNumber: 1
+  isFinishLine: 0
+  triggerDistance: 10
+  waypointSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  finishSound: {fileID: 0}
 --- !u!212 &1646853977
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -40423,10 +40435,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 9abce3e87c5b94d899d1dbbdc1b9a2ff, type: 3}
   size: {x: 30, y: 30}
   rotateWithObject: 0
-  upAxis: {x: 0, y: 1, z: 0}
-  initialIconRotation: 0
-  clampIconInBorder: 1
-  clampDistance: 100
+  isWaypoint: 0
+  waypointNumber: 1
+  isFinishLine: 0
+  triggerDistance: 3
+  waypointSound: {fileID: 0}
+  finishSound: {fileID: 0}
 --- !u!23 &7681131634123415795
 MeshRenderer:
   m_ObjectHideFlags: 0
