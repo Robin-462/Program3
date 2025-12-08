@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Reflection;
+using MiniMap.Scripts;
 
 [ExecuteInEditMode]
 public class MiniMapController : MonoBehaviour
